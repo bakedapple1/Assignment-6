@@ -76,11 +76,13 @@ function RegisterView() {
                         </form>
                     </div>
 
-                    <div className="checkbox-list">
+                    <div className="reg-checkbox-list">
+                        <h1 className="reg-select-label">Select Genres</h1>
+                        <div className="reg-subtitle">&#40;Select up to 5 genres&#41;</div>
                         {genresArray.map((genreCheck, index) => (
-                            <div className="checkbox">
-                                <label htmlFor={`check${genreCheck.id}`}>{genreCheck.genre}</label>
-                                <input type="checkbox" key={genreCheck.id} id={`check${genreCheck.id}`} className="reg-genres" onChange={() => setPreferences(index)} />
+                            <div className="reg-genres">
+                                <label htmlFor={`check${genreCheck.id}`} className="reg-genre-labels">{genreCheck.genre}</label>
+                                <input type="checkbox" key={genreCheck.id} id={`check${genreCheck.id}`} className="reg-checkboxes" onChange={() => setPreferences(index)} />
                             </div>
                         ))}
                     </div>
