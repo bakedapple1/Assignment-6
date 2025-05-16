@@ -36,7 +36,7 @@ function LoginView() {
                         <input type="email" name="log-email" id="log-email" className="log-input" value={email} onChange={(event) => { setEmail(event.target.value) }} />
                         <label htmlFor="log-pass" className="log-input-label">Password:</label>
                         <input type="password" name="log-pass" id="log-pass" className="log-input" value={password} onChange={(event) => { setPassword(event.target.value) }} />
-                        <input type="submit" value="Sign In" className="submit-button" id="log-submit" />
+                        <input type="submit" form="login-form" value="Sign In" className="log-submit-button" id="log-submit" />
                     </form>
                 </div>
             </div>

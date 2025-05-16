@@ -57,7 +57,7 @@ input {
     background-color: #555;
 }
 
-.submit-button {
+.log-submit-button {
     margin-top: 20px;
     width: 400px;
     height: 40px;
@@ -74,7 +74,7 @@ input {
     cursor: pointer;
 }
 
-.submit-button:hover {
+.log-submit-button:hover {
     background-color: white;
     border: 2px solid rgb(255, 90, 90);
     color: rgb(255, 90, 90);

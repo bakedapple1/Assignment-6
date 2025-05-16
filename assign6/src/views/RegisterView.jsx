@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import "./RegisterView.css";
 
 function RegisterView() {
-    let selectedGenres = Array(12).fill(false);
+    const [selectedGenres, setSelectedGenres] = useState(Array(12).fill(false));
     const navigate = useNavigate();
     const { userData, setUserData } = useStoreContext();
     const [userInfo, setUserInfo] = useState({
@@ -32,8 +32,11 @@ function RegisterView() {
     ]);
 
     function setPreferences(idx) {
-        selectedGenres[idx] = !selectedGenres[idx];
-        console.log(selectedGenres);
+        setSelectedGenres(prev => {
+            const newSelected = [...prev];
+            newSelected[idx] = !newSelected[idx];
+            return newSelected;
+        });
     }
 
     function createAccount(event) {
@@ -45,11 +48,13 @@ function RegisterView() {
         } else if (userData.has(userInfo.email)) {
             alert("This email has already been registered!");
             setUserInfo((prev) => ({ ...prev, firstName: '', lastName: '', email: '', password: '', confPass: '' }));
+        } else if (selectedGenres.filter(Boolean).length < 5) {
+            alert("Please select at least 5 genres.");
         } else {
             const newData = new Map(userData);
             newData.set(userInfo.email, userInfo);
             setUserData(newData);
-            alert("Account successfully created");
+            alert("Account successfully created.");
             navigate(`/`);
         }
     }
@@ -59,8 +64,8 @@ function RegisterView() {
             <Header />
             <div className="register">
                 <div className="register-menu">
-                    <div>
-                        <h1 className="register-label">Sign Up</h1>
+                    <h1 className="register-label">Sign Up</h1>
+                    <div className="register-form-container">
                         <form className="register-form" id="register-form" onSubmit={(event) => { createAccount(event) }}>
                             <label htmlFor="reg-first-name" className="reg-input-label">First Name:</label>
                             <input type="text" name="reg-first-name" className="reg-input" id="reg-first-name" value={userInfo.firstName} onChange={(event) => { setUserInfo((prev) => ({ ...prev, firstName: event.target.value })) }} required />
@@ -72,20 +77,22 @@ function RegisterView() {
                             <input type="password" name="reg-pass" className="reg-input" id="reg-pass" value={userInfo.password} onChange={(event) => { setUserInfo((prev) => ({ ...prev, password: event.target.value })) }} required />
                             <label htmlFor="reg-conf-pass" className="reg-input-label">Confirm Password:</label>
                             <input type="password" name="reg-conf-pass" className="reg-input" id="reg-conf-pass" value={userInfo.confPass} onChange={(event) => { setUserInfo((prev) => ({ ...prev, confPass: event.target.value })) }} required />
-                            <input type="submit" value="Register" className="submit-button" id="reg-submit" />
                         </form>
                     </div>
 
-                    <div className="reg-checkbox-list">
+                    <div className="reg-genre-container">
                         <h1 className="reg-select-label">Select Genres</h1>
-                        <div className="reg-subtitle">&#40;Select up to 5 genres&#41;</div>
-                        {genresArray.map((genreCheck, index) => (
-                            <div className="reg-genres">
-                                <label htmlFor={`check${genreCheck.id}`} className="reg-genre-labels">{genreCheck.genre}</label>
-                                <input type="checkbox" key={genreCheck.id} id={`check${genreCheck.id}`} className="reg-checkboxes" onChange={() => setPreferences(index)} />
-                            </div>
-                        ))}
+                        <div className="reg-subtitle">&#40;Select at least 5 genres&#41;</div>
+                        <div className="reg-checkbox-list">
+                            {genresArray.map((genreCheck, index) => (
+                                <div className="reg-genres">
+                                    <label htmlFor={`check${genreCheck.id}`} className="reg-genre-labels">{genreCheck.genre}</label>
+                                    <input checked={selectedGenres[index]} type="checkbox" key={genreCheck.id} id={`check${genreCheck.id}`} className="reg-checkboxes" onChange={() => setPreferences(index)} />
+                                </div>
+                            ))}
+                        </div>
                     </div>
+                    <input type="submit" form="register-form" value="Register" className="reg-submit-button" id="reg-submit" />
                 </div>
             </div>
             <Footer />
