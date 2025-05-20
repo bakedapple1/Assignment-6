@@ -5,7 +5,7 @@ import "./Genres.css";
 
 function Genres() {
     const navigate = useNavigate();
-    const { toggleState, setToggleState, setSelectedGenre } = useStoreContext();
+    const { toggleState, setToggleState, setSelectedGenre, preferredGenres } = useStoreContext();
     const [genresArray] = useState([
         { genre: "Action", id: 28 },
         { genre: "Adventure", id: 12 },
@@ -19,7 +19,7 @@ function Genres() {
         { genre: "Sci-Fi", id: 878 },
         { genre: "War", id: 10752 },
         { genre: "Western", id: 37 }
-    ]);
+    ].filter((g, index) => preferredGenres[index]));
 
     function toggleGenre(buttonIdx) {
         const newToggleState = Array(genresArray.length).fill(false);

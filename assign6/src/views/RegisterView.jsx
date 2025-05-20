@@ -8,7 +8,7 @@ import "./RegisterView.css";
 function RegisterView() {
     const [selectedGenres, setSelectedGenres] = useState(Array(12).fill(false));
     const navigate = useNavigate();
-    const { userData, setUserData } = useStoreContext();
+    const { userData, setUserData, preferredGenres, setPreferredGenres, setCurrentUser, selectedGenre } = useStoreContext();
     const [userInfo, setUserInfo] = useState({
         firstName: '',
         lastName: '',
@@ -54,8 +54,10 @@ function RegisterView() {
             const newData = new Map(userData);
             newData.set(userInfo.email, userInfo);
             setUserData(newData);
+            setPreferredGenres([...selectedGenres]);
+            setCurrentUser(userInfo.email);
             alert("Account successfully created.");
-            navigate(`/`);
+            navigate(`/movies/genre/${selectedGenre}`);
         }
     }
 
