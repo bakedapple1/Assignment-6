@@ -9,6 +9,7 @@ import MoviesView from "./views/MoviesView.jsx";
 import ProtectedRoutes from "./views/ProtectedRoutes.jsx";
 import RegisterView from './views/RegisterView.jsx';
 import CartView from "./views/CartView.jsx";
+import SettingsView from "./views/SettingsView.jsx";
 import './App.css';
 
 function App() {
@@ -25,7 +26,8 @@ function App() {
               <Route path="genre/:genre_id" element={<GenreView />} />
               <Route path="details/:id" element={<DetailView />} />
             </Route>
-            <Route path="cart" element={<CartView />} />
+            <Route path="/cart" element={<CartView />} />
+            <Route path="/settings" element={<SettingsView />} />
           </Route>
           <Route path="*" element={<ErrorView />} />
         </Routes>

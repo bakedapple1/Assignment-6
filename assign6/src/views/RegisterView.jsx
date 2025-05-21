@@ -88,7 +88,7 @@ function RegisterView() {
                         <div className="reg-checkbox-list">
                             {genresArray.map((genreCheck, index) => (
                                 <div className="reg-genres" key={`reg-check-cont-${genreCheck.id}`}>
-                                    <label htmlFor={`check${genreCheck.id}`} key={`reg-label-${genreCheck.id}`} className="reg-genre-labels">{genreCheck.genre}</label>
+                                    <label htmlFor={`check-${genreCheck.id}`} key={`reg-label-${genreCheck.id}`} className="reg-genre-labels">{genreCheck.genre}</label>
                                     <input checked={selectedGenres[index]} type="checkbox" key={`reg-check-${genreCheck.id}`} id={`check-${genreCheck.id}`} className="reg-checkboxes" onChange={() => setPreferences(index)} />
                                 </div>
                             ))}
