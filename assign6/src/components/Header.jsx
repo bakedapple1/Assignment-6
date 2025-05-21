@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useStoreContext } from "../context";
+import SearchIcon from "../assets/search-icon.png";
 import "./Header.css";
 
 function Header() {
     const navigate = useNavigate();
     const { userData, currentUser, setCurrentUser } = useStoreContext();
+    const [query, setQuery] = useState('');
 
     function logOut() {
         setCurrentUser(null);
@@ -16,14 +19,29 @@ function Header() {
             <div className="logo" onClick={() => navigate(`/`)}>
                 BingeBerry
             </div>
+            {currentUser &&
+                <form className="search-form" id="search-form" onSubmit={() => navigate(`/search/${query}`)}>
+                    <input type="text" placeholder="Search movies" value={query} onChange={(event) => setQuery(event.target.value)} />
+                    <button type="submit" value="" className="search-submit-button" id="search-submit">
+                        <img src={SearchIcon} className="search-icon" />
+                    </button>
+                </form>
+            }
 
             {currentUser ? (
                 <div className="logged-in">
                     <p className="welc-msg">Welcome, {userData.get(currentUser).firstName}!</p>
+                    <button className="cart-button" onClick={() => navigate(`/cart`)}>
+                        Cart
+                    </button>
+                    <button className="settings-button" onClick={() => navigate(`/settings`)}>
+                        Settings
+                    </button>
                     <button className="log-out" onClick={() => logOut()}>
                         Log out
                     </button>
                 </div>
+
             ) : (
                 <div className="logged-out">
                     <button className="sign-up" onClick={() => navigate(`/register`)}>
