@@ -10,9 +10,11 @@ export const StoreProvider = ({ children }) => {
     const [preferredGenres, setPreferredGenres] = useState(Array(12).fill(false));
     const [selectedGenre, setSelectedGenre] = useState("*");
     const [pageNum, setPageNum] = useState(1);
+    const [cart, setCart] = useState(Map());
+    
 
     return (
-        <StoreContext.Provider value={{ userData, setUserData, currentUser, setCurrentUser, toggleState, setToggleState, preferredGenres, setPreferredGenres, selectedGenre, setSelectedGenre, pageNum, setPageNum }}>
+        <StoreContext.Provider value={{ userData, setUserData, currentUser, setCurrentUser, toggleState, setToggleState, preferredGenres, setPreferredGenres, selectedGenre, setSelectedGenre, pageNum, setPageNum, cart, setCart }}>
             {children}
         </StoreContext.Provider>
     )

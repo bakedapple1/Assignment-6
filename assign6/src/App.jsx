@@ -8,6 +8,7 @@ import LoginView from './views/LoginView.jsx';
 import MoviesView from "./views/MoviesView.jsx";
 import ProtectedRoutes from "./views/ProtectedRoutes.jsx";
 import RegisterView from './views/RegisterView.jsx';
+import CartView from "./views/CartView.jsx";
 import './App.css';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
               <Route path="genre/:genre_id" element={<GenreView />} />
               <Route path="details/:id" element={<DetailView />} />
             </Route>
+            <Route path="cart" element={<CartView />} />
           </Route>
           <Route path="*" element={<ErrorView />} />
         </Routes>

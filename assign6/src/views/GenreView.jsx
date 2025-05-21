@@ -8,7 +8,7 @@ import "./GenreView.css";
 function GenreView() {
     const navigate = useNavigate();
     const param = useParams();
-    const { pageNum, setPageNum } = useStoreContext();
+    const { pageNum, setPageNum, cart, setCart } = useStoreContext();
     const [genreMovies, setGenreMovies] = useState();
 
     function changePageBy(changeBy) {
@@ -37,8 +37,9 @@ function GenreView() {
                 <div className="genre-movies">
                     {genreMovies.map(movie => (
                         <div className="gen-mov" key={movie.id}>
-                            <img className="gen-mov-poster" src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : ImgNotAvail} alt={`${movie.id}`} onClick={() => navigate(`/movies/details/${movie.id}`)} />
+                            <img className="gen-mov-poster" src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : ImgNotAvail} key={`${movie.id}`} onClick={() => navigate(`/movies/details/${movie.id}`)} />
                             <h1 className="gen-mov-label">{`${movie.title}`}</h1>
+                            <button className="buy-button" disabled={cart.has(movie.id)} onClick={() => setCart((prevCart) => prevCart.set(movie.id, movie))}>{cart.has(movie.id) ? "Added" : "Buy"}</button>
                         </div>
                     ))}
                 </div>
