@@ -8,7 +8,6 @@ function SettingsView() {
     const { userData, setUserData, currentUser, preferredGenres, setPreferredGenres } = useStoreContext();
     const [newFirstName, setNewFirstName] = useState("");
     const [newLastName, setNewLastName] = useState("");
-    const [newPreferences, setNewPreferences] = useState([...preferredGenres]);
     const [genresArray] = useState([
         { genre: "Action", id: 28 },
         { genre: "Adventure", id: 12 },
@@ -27,45 +26,50 @@ function SettingsView() {
     function updateAccount(event) {
         event.preventDefault();
         console.log(userData);
+        alert("Account updated.")
         setUserData((prev) => {
-            return {
-                ...prev,
-                [currentUser]: {
-                    ...prev[currentUser],
-                    firstName: newFirstName,
-                    lastName: newLastName
-                }
-            };
+            return prev.set(currentUser, {
+                ...prev.get(currentUser),
+                firstName: newFirstName,
+                lastName: newLastName
+            });
         });
+        setNewFirstName("");
+        setNewLastName("");
+    }
+
+    function changePreferences(index) {
+        const newPreferences = [...preferredGenres];
+        newPreferences[index] = !newPreferences[index];
+        setPreferredGenres(newPreferences);
     }
 
     return (
         <div className="settings-view-container">
             <Header />
             <div className="settings-container">
-                <h2 className="settings-title">Settings</h2>
+                <h1 className="settings-title">Settings</h1>
                 <form className="settings-form" id="settings-form" onSubmit={(event) => { updateAccount(event) }}>
                     <label htmlFor="set-first-name" className="set-input-label">First Name:</label>
-                    <input type="text" name="set-first-name" className="set-input" id="set-first-name" placeholder={userData.get(currentUser).firstName} value={newFirstName} onChange={(event) => { setNewFirstName(() => (event.target.value)) }} required />
+                    <input type="text" name="set-first-name" className="set-input" id="set-first-name" placeholder={userData.get(currentUser).firstName} value={newFirstName} onChange={(event) => { setNewFirstName(event.target.value) }} required />
                     <label htmlFor="set-last-name" className="set-input-label">Last Name:</label>
-                    <input type="text" name="set-last-name" className="set-input" id="set-last-name" placeholder={userData.get(currentUser).lastName} value={newLastName} onChange={(event) => { setNewLastName(() => (event.target.value)) }} required />
-                    <label htmlFor="set-email" className="set-input-label">Email:</label>
-                    <input type="email" name="set-email" className="set-input" id="set-email" value={userData.get(currentUser).email} disabled />
-                    <input className="set-save-button" type="submit" value="Save" />
+                    <input type="text" name="set-last-name" className="set-input" id="set-last-name" placeholder={userData.get(currentUser).lastName} value={newLastName} onChange={(event) => { setNewLastName(event.target.value) }} required />
+                    <div className="set-email">{`Email: ${userData.get(currentUser).email}`}</div>
                 </form>
 
                 <div className="set-genre-container">
-                    <h1 className="set-select-label">Select Genres</h1>
+                    <h2 className="set-select-label">Select Genres</h2>
                     <div className="set-subtitle">&#40;Select at least 5 genres&#41;</div>
                     <div className="set-checkbox-list">
                         {genresArray.map((genreCheck, index) => (
                             <div className="set-genres" key={`set-check-cont-${genreCheck.id}`}>
                                 <label htmlFor={`check${genreCheck.id}`} key={`set-label-${genreCheck.id}`} className="set-genre-labels">{genreCheck.genre}</label>
-                                <input checked={selectedGenres[index]} type="checkbox" key={`set-check-${genreCheck.id}`} id={`check-${genreCheck.id}`} className="set-checkboxes" onChange={() => setNewPreferences(index)} />
+                                <input checked={preferredGenres[index]} type="checkbox" key={`set-check-${genreCheck.id}`} id={`check-${genreCheck.id}`} className="set-checkboxes" onChange={() => changePreferences(index)} />
                             </div>
                         ))}
                     </div>
                 </div>
+                <input form="settings-form" className="set-save-button" type="submit" value="Save" />
             </div>
             <Footer />
         </div>

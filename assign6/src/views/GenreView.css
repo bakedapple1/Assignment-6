@@ -4,7 +4,8 @@
     margin-top: 150px;
     align-items: center;
     width: auto;
-    height: 3000px;
+    height: auto;
+    margin-bottom: 40px;
 }
 
 .gen-mov {

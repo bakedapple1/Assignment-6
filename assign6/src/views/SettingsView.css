@@ -1,3 +1,7 @@
 .settings-container {
     margin-top: 120px;
 }
+
+.settings-title {
+    color: rgb(255, 90, 90);
+}
