@@ -6,7 +6,7 @@ import "./Header.css";
 
 function Header() {
     const navigate = useNavigate();
-    const { userData, currentUser, setCurrentUser } = useStoreContext();
+    const { userData, currentUser, setCurrentUser, cart } = useStoreContext();
     const [query, setQuery] = useState('');
 
     function logOut() {
@@ -32,7 +32,7 @@ function Header() {
                 <div className="logged-in">
                     <p className="welc-msg">Welcome, {userData.get(currentUser).firstName}!</p>
                     <button className="cart-button" onClick={() => navigate(`/cart`)}>
-                        Cart
+                        {`Cart (${cart.size > 99 ? '99+' : cart.size})`}
                     </button>
                     <button className="settings-button" onClick={() => navigate(`/settings`)}>
                         Settings

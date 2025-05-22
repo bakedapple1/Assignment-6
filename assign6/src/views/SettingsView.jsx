@@ -26,16 +26,20 @@ function SettingsView() {
     function updateAccount(event) {
         event.preventDefault();
         console.log(userData);
-        alert("Account updated.")
-        setUserData((prev) => {
-            return prev.set(currentUser, {
-                ...prev.get(currentUser),
-                firstName: newFirstName,
-                lastName: newLastName
+        if (preferredGenres.filter(Boolean).length < 5) {
+            alert("Please select at least 5 genres.");
+        } else {
+            alert("Account updated.")
+            setUserData((prev) => {
+                return prev.set(currentUser, {
+                    ...prev.get(currentUser),
+                    firstName: newFirstName || prev.get(currentUser).firstName,
+                    lastName: newLastName || prev.get(currentUser).lastName
+                });
             });
-        });
-        setNewFirstName("");
-        setNewLastName("");
+            setNewFirstName("");
+            setNewLastName("");
+        }
     }
 
     function changePreferences(index) {
@@ -50,11 +54,11 @@ function SettingsView() {
             <div className="settings-container">
                 <h1 className="settings-title">Settings</h1>
                 <form className="settings-form" id="settings-form" onSubmit={(event) => { updateAccount(event) }}>
-                    <label htmlFor="set-first-name" className="set-input-label">First Name:</label>
-                    <input type="text" name="set-first-name" className="set-input" id="set-first-name" placeholder={userData.get(currentUser).firstName} value={newFirstName} onChange={(event) => { setNewFirstName(event.target.value) }} required />
-                    <label htmlFor="set-last-name" className="set-input-label">Last Name:</label>
-                    <input type="text" name="set-last-name" className="set-input" id="set-last-name" placeholder={userData.get(currentUser).lastName} value={newLastName} onChange={(event) => { setNewLastName(event.target.value) }} required />
                     <div className="set-email">{`Email: ${userData.get(currentUser).email}`}</div>
+                    <label htmlFor="set-first-name" className="set-input-label">First Name:</label>
+                    <input type="text" name="set-first-name" className="set-input" id="set-first-name" placeholder={userData.get(currentUser).firstName} value={newFirstName} onChange={(event) => { setNewFirstName(event.target.value) }} />
+                    <label htmlFor="set-last-name" className="set-input-label">Last Name:</label>
+                    <input type="text" name="set-last-name" className="set-input" id="set-last-name" placeholder={userData.get(currentUser).lastName} value={newLastName} onChange={(event) => { setNewLastName(event.target.value) }} />
                 </form>
 
                 <div className="set-genre-container">

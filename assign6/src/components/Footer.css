@@ -27,6 +27,10 @@
     color: white;
 }
 
+.footer-divider {
+    width: 100vw;
+}
+
 @media (min-width: 1000px) and (max-width: 1500px) {
     .footer {
         width: 1000px;

@@ -4,7 +4,7 @@ function Footer() {
 
     return (
         <>
-            <hr />
+            <hr className="footer-divider" />
             <div className="footer">
                 <div className="footer-links">
                     <a className="footer-link" id="github" href="https://github.com/bakedapple1/Assignment-5" target="_blank">GitHub</a>
