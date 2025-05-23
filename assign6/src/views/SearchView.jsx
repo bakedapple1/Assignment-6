@@ -9,8 +9,6 @@ function SearchView() {
 
     return (
         <div>
-            <Header />
-            <Footer />
         </div>
     );
 }

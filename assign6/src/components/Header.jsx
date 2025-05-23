@@ -7,7 +7,7 @@ import { set } from 'immutable';
 
 function Header() {
     const navigate = useNavigate();
-    const { userData, currentUser, setCurrentUser, cart, query, setQuery } = useStoreContext();
+    const { userData, currentUser, setCurrentUser, cart, setQuery } = useStoreContext();
     const [newQuery, setNewQuery] = useState("");
 
 
@@ -16,11 +16,13 @@ function Header() {
         alert("Logged out!");
     }
 
-    function handleSearch() {
+    function handleSearch(event) {
+        event.preventDefault();
         if (!newQuery) {
             alert("Please enter a search query.");
         } else {
             setQuery(newQuery);
+            setNewQuery("");
             navigate(`/movies/search`);
         }
     }
@@ -31,7 +33,7 @@ function Header() {
                 BingeBerry
             </div>
             {currentUser &&
-                <form className="search-form" id="search-form" onSubmit={() => handleSearch()}>
+                <form className="search-form" id="search-form" onSubmit={(event) => handleSearch(event)}>
                     <input type="text" placeholder="Search movies" value={newQuery} onChange={(event) => setNewQuery(event.target.value)} />
                     <button type="submit" value="" className="search-submit-button" id="search-submit">
                         <img src={SearchIcon} className="search-icon" />

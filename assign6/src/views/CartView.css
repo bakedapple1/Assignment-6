@@ -30,10 +30,11 @@
 .cart-items {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
 .cart-poster {
-    width: 330px;
+    width: 300px;
     justify-self: center;
     scale: 0.9;
     transition: 0.9s;
