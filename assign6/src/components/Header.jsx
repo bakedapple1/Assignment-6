@@ -34,7 +34,7 @@ function Header() {
             </div>
             {currentUser &&
                 <form className="search-form" id="search-form" onSubmit={(event) => handleSearch(event)}>
-                    <input type="text" placeholder="Search movies" value={newQuery} onChange={(event) => setNewQuery(event.target.value)} />
+                    <input type="text" placeholder="Search movies" value={newQuery} onInput={(event) => setNewQuery(event.target.value)} />
                     <button type="submit" value="" className="search-submit-button" id="search-submit">
                         <img src={SearchIcon} className="search-icon" />
                     </button>

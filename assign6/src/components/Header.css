@@ -17,7 +17,7 @@
     justify-self: right;
     width: auto;
     display: grid;
-    grid-template-columns: 15vw 125px 125px 125px;
+    grid-template-columns: auto auto 125px 125px;
     justify-content: center;
     align-content: center;
 }
@@ -101,6 +101,7 @@
     color: white;
     align-self: center;
     justify-self: left;
+    margin-right: 30px;
 }
 
 .log-out,

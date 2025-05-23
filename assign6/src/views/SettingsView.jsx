@@ -5,9 +5,10 @@ import Footer from "../components/Footer.jsx";
 import "./SettingsView.css";
 
 function SettingsView() {
-    const { userData, setUserData, currentUser, preferredGenres, setPreferredGenres } = useStoreContext();
+    const { userData, setUserData, currentUser, preferredGenres, setPreferredGenres, setPageNum, setToggleState, setSelectedGenre } = useStoreContext();
     const [newFirstName, setNewFirstName] = useState("");
     const [newLastName, setNewLastName] = useState("");
+    const [newPreferredGenres, setnewPreferredGenres] = useState(preferredGenres);
     const [genresArray] = useState([
         { genre: "Action", id: 28 },
         { genre: "Adventure", id: 12 },
@@ -26,10 +27,11 @@ function SettingsView() {
     function updateAccount(event) {
         event.preventDefault();
         console.log(userData);
-        if (preferredGenres.filter(Boolean).length < 5) {
+        if (newPreferredGenres.filter(Boolean).length < 5) {
             alert("Please select at least 5 genres.");
         } else {
             alert("Account updated.")
+            setPreferredGenres(newPreferredGenres);
             setUserData((prev) => {
                 return prev.set(currentUser, {
                     ...prev.get(currentUser),
@@ -39,13 +41,16 @@ function SettingsView() {
             });
             setNewFirstName("");
             setNewLastName("");
+            setPageNum(1);
+            setToggleState(Array(12).fill(false));
+            setSelectedGenre("*");
         }
     }
 
     function changePreferences(index) {
-        const newPreferences = [...preferredGenres];
+        const newPreferences = [...newPreferredGenres];
         newPreferences[index] = !newPreferences[index];
-        setPreferredGenres(newPreferences);
+        setnewPreferredGenres(newPreferences);
     }
 
     return (
@@ -67,8 +72,8 @@ function SettingsView() {
                     <div className="set-checkbox-list">
                         {genresArray.map((genreCheck, index) => (
                             <div className="set-genres" key={`set-check-cont-${genreCheck.id}`}>
-                                <label htmlFor={`check${genreCheck.id}`} key={`set-label-${genreCheck.id}`} className="set-genre-labels">{genreCheck.genre}</label>
-                                <input checked={preferredGenres[index]} type="checkbox" key={`set-check-${genreCheck.id}`} id={`check-${genreCheck.id}`} className="set-checkboxes" onChange={() => changePreferences(index)} />
+                                <label htmlFor={`check-${genreCheck.id}`} key={`set-label-${genreCheck.id}`} className="set-genre-labels">{genreCheck.genre}</label>
+                                <input checked={newPreferredGenres[index]} type="checkbox" key={`set-check-${genreCheck.id}`} id={`check-${genreCheck.id}`} className="set-checkboxes" onChange={() => changePreferences(index)} />
                             </div>
                         ))}
                     </div>
