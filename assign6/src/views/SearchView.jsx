@@ -54,7 +54,8 @@ function SearchView() {
     }
 
     return (
-        searchRes && searchRes.length > 0 ? (
+        <div>
+            {searchRes && searchRes.length > 0 ? (
             <div className="search-view-container">
                 <div className="search-movies">
                     {searchRes.map(movie => (
@@ -65,16 +66,8 @@ function SearchView() {
                         </div>
                     ))}
                 </div>
-
-                <div className="pagination" id="search-pag">
-                    <button className={(searchPageNum != 1) ? "active-ten-page-button" : "inactive-ten-page-button"} onClick={() => changePageBy(-10)}>&lt;&lt;</button>
-                    <button className={(searchPageNum != 1) ? "active-page-button" : "inactive-page-button"} onClick={() => changePageBy(-1)}>Prev</button>
-                    <div className="page-counter" >Page: {searchPageNum}</div>
-                    <button className={(searchPageNum != 500) ? "active-page-button" : "inactive-page-button"} onClick={() => changePageBy(1)}>Next</button>
-                    <button className={(searchPageNum != 500) ? "active-ten-page-button" : "inactive-ten-page-button"} onClick={() => changePageBy(10)}>&gt;&gt;</button>
-                </div>
             </div>
-        ) : (
+            ) : (
             <div className="fetching-msg">
                 {waitMsg.map((line, index) => (
                     <span key={index}>
@@ -83,7 +76,15 @@ function SearchView() {
                     </span>
                 ))}
             </div>
-        )
+            )}
+            <div div className="pagination" id="search-pag" >
+                <button className={(searchPageNum != 1) ? "active-ten-page-button" : "inactive-ten-page-button"} onClick={() => changePageBy(-10)}>&lt;&lt;</button>
+                <button className={(searchPageNum != 1) ? "active-page-button" : "inactive-page-button"} onClick={() => changePageBy(-1)}>Prev</button>
+                <div className="page-counter" >Page: {searchPageNum}</div>
+                <button className={(searchPageNum != 500) ? "active-page-button" : "inactive-page-button"} onClick={() => changePageBy(1)}>Next</button>
+                <button className={(searchPageNum != 500) ? "active-ten-page-button" : "inactive-ten-page-button"} onClick={() => changePageBy(10)}>&gt;&gt;</button>
+            </div >
+        </div>
     );
 }
 
