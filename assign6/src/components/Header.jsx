@@ -8,8 +8,6 @@ import "./Header.css";
 function Header() {
     const navigate = useNavigate();
     const { userData, currentUser, setCurrentUser, cart, query, setQuery } = useStoreContext();
-    const [dropDownRes, setDropDownRes] = useState([]);
-
 
     function logOut() {
         setCurrentUser(null);

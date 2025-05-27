@@ -8,7 +8,7 @@ import "./DetailView.css";
 function DetailView() {
     const navigate = useNavigate();
     const param = useParams();
-    const { selectedGenre } = useStoreContext();
+    const { selectedGenre, prevPage } = useStoreContext();
     const [movie, setMovie] = useState([]);
     const [trailer, setTrailer] = useState();
 
@@ -62,7 +62,7 @@ function DetailView() {
                 </div>
                 <iframe className="mov-trailer" src={`https://www.youtube.com/embed/${trailer}`} frameborder="0" allowFullScreen></iframe>
             </div>
-            <div className="return-movies" onClick={() => navigate(`/movies/genre/${selectedGenre}`)}>&times;</div>
+            <div className="return-movies" onClick={() => navigate(prevPage)}>&times;</div>
         </>
     );
 }

@@ -33,7 +33,7 @@ function Genres() {
 
     return (
         <div className="genre-container">
-            <h1 className="genre-msg">Select Genres</h1>
+            <h1 className="genre-msg">Explore a Genre</h1>
             <div className="genre-select">
                 {genresArray.map((genreSelect, index) => (
                     <button key={genreSelect.id} className={toggleState[index] ? "active-genre" : "inactive-genre"} onClick={() => toggleGenre(index)}>

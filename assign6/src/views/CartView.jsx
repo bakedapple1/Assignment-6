@@ -2,9 +2,17 @@ import { useStoreContext } from "../context";
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
 import './CartView.css';
+import { useLocation, useNavigate } from "react-router-dom";
 
 function CartView() {
     const { cart, setCart } = useStoreContext();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    function navigateTo(page) {
+        setPrevPage(location.pathname);
+        navigate(page);
+    }
 
     return (
         <div className="cart-view-container">

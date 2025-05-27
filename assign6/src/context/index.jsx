@@ -10,12 +10,14 @@ export const StoreProvider = ({ children }) => {
     const [preferredGenres, setPreferredGenres] = useState(Array(12).fill(false));
     const [selectedGenre, setSelectedGenre] = useState("*");
     const [pageNum, setPageNum] = useState(1);
+    const [searchPageNum, setSearchPageNum] = useState(1);
     const [cart, setCart] = useState(Map());
     const [query, setQuery] = useState("");
+    const [prevPage, setPrevPage] = useState("");
     
 
     return (
-        <StoreContext.Provider value={{ userData, setUserData, currentUser, setCurrentUser, toggleState, setToggleState, preferredGenres, setPreferredGenres, selectedGenre, setSelectedGenre, pageNum, setPageNum, cart, setCart, query, setQuery }}>
+        <StoreContext.Provider value={{ userData, setUserData, currentUser, setCurrentUser, toggleState, setToggleState, preferredGenres, setPreferredGenres, selectedGenre, setSelectedGenre, pageNum, setPageNum, searchPageNum, setSearchPageNum, cart, setCart, query, setQuery, prevPage, setPrevPage }}>
             {children}
         </StoreContext.Provider>
     )
