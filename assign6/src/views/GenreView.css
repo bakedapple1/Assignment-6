@@ -62,9 +62,9 @@
 }
 
 .buy-button:disabled {
-    background-color: rgb(252, 150, 150);;
+    background-color: rgb(252, 150, 150);
     color: white;
-    border: 2px solid rgb(252, 150, 150);;
+    border: 2px solid rgb(252, 150, 150);
     cursor: default;
 }
 

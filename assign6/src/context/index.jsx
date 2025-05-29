@@ -14,7 +14,6 @@ export const StoreProvider = ({ children }) => {
     const [cart, setCart] = useState(Map());
     const [query, setQuery] = useState("");
     const [prevPage, setPrevPage] = useState("");
-    
 
     return (
         <StoreContext.Provider value={{ userData, setUserData, currentUser, setCurrentUser, toggleState, setToggleState, preferredGenres, setPreferredGenres, selectedGenre, setSelectedGenre, pageNum, setPageNum, searchPageNum, setSearchPageNum, cart, setCart, query, setQuery, prevPage, setPrevPage }}>

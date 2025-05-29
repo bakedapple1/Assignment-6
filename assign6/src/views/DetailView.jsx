@@ -8,7 +8,7 @@ import "./DetailView.css";
 function DetailView() {
     const navigate = useNavigate();
     const param = useParams();
-    const { selectedGenre, prevPage } = useStoreContext();
+    const { prevPage } = useStoreContext();
     const [movie, setMovie] = useState([]);
     const [trailer, setTrailer] = useState();
 

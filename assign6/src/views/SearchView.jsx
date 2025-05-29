@@ -56,26 +56,26 @@ function SearchView() {
     return (
         <div>
             {searchRes && searchRes.length > 0 ? (
-            <div className="search-view-container">
-                <div className="search-movies">
-                    {searchRes.map(movie => (
-                        <div className="search-mov" key={movie.id}>
-                            <img className="search-mov-poster" src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : ImgNotAvail} key={`${movie.id}`} onClick={() => navigateTo(`/movies/details/${movie.id}`)} />
-                            <h1 className="search-mov-label">{`${movie.title}`}</h1>
-                            <button className="search-buy-button" disabled={cart.has(movie.id)} onClick={() => setCart((prevCart) => prevCart.set(movie.id, movie))}>{cart.has(movie.id) ? "Added" : "Buy"}</button>
-                        </div>
+                <div className="search-view-container">
+                    <div className="search-movies">
+                        {searchRes.map(movie => (
+                            <div className="search-mov" key={movie.id}>
+                                <img className="search-mov-poster" src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : ImgNotAvail} key={`${movie.id}`} onClick={() => navigateTo(`/movies/details/${movie.id}`)} />
+                                <h1 className="search-mov-label">{`${movie.title}`}</h1>
+                                <button className="search-buy-button" disabled={cart.has(movie.id)} onClick={() => setCart((prevCart) => prevCart.set(movie.id, movie))}>{cart.has(movie.id) ? "Added" : "Buy"}</button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            ) : (
+                <div className="fetching-msg">
+                    {waitMsg.map((line, index) => (
+                        <span key={index}>
+                            {line}
+                            {index < waitMsg.length - 1 && <br />}
+                        </span>
                     ))}
                 </div>
-            </div>
-            ) : (
-            <div className="fetching-msg">
-                {waitMsg.map((line, index) => (
-                    <span key={index}>
-                        {line}
-                        {index < waitMsg.length - 1 && <br />}
-                    </span>
-                ))}
-            </div>
             )}
             <div div className="pagination" id="search-pag" >
                 <button className={(searchPageNum != 1) ? "active-ten-page-button" : "inactive-ten-page-button"} onClick={() => changePageBy(-10)}>&lt;&lt;</button>

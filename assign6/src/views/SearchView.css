@@ -158,9 +158,11 @@
     .search-movies {
         grid-template-columns: repeat(3, 1fr);
     }
+
     .search-mov-poster {
         width: 200px;
     }
+
     .search-mov-label {
         width: 250px;
     }
@@ -170,9 +172,11 @@
     .search-movies {
         grid-template-columns: repeat(2, 1fr);
     }
+
     .search-mov-poster {
         width: 150px;
     }
+
     .search-mov-label {
         width: 200px;
     }

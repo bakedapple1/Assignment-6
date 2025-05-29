@@ -1,5 +1,3 @@
-import axios from "axios";
-import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useStoreContext } from "../context";
 import SearchIcon from "../assets/search-icon.png";
@@ -46,7 +44,6 @@ function Header() {
                         Log out
                     </button>
                 </div>
-
             ) : (
                 <div className="logged-out">
                     <button className="sign-up" onClick={() => navigate(`/register`)}>
